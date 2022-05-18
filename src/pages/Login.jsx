@@ -28,7 +28,6 @@ class Login extends React.Component {
   }
 
   render() {
-    // console.log(this.props.history);
     const { isDisabled, isLoading } = this.state;
     return (
       <div data-testid="page-login">
