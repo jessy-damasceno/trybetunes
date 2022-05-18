@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
+import Loading from '../components/Loading';
+import LOGO_POSITIVA from '../assets/LOGO_POSITIVA.png';
 
 class Login extends React.Component {
   state = {
@@ -30,12 +32,14 @@ class Login extends React.Component {
   render() {
     const { isDisabled, isLoading } = this.state;
     return (
-      <div data-testid="page-login">
-        <form>
+      <div className="page-login" data-testid="page-login">
+        <img src={ LOGO_POSITIVA } alt="TrybeTunes Logo" />
+        <form className="login_form">
           <input
             data-testid="login-name-input"
             type="text"
             name="login-name-input"
+            placeholder="Nome"
             onChange={ this.handleChange }
           />
           <button
@@ -47,7 +51,7 @@ class Login extends React.Component {
             Entrar
           </button>
         </form>
-        {isLoading && <h3>Carregando...</h3>}
+        {isLoading && <Loading />}
       </div>
     );
   }

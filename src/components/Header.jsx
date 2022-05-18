@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
+import Loading from './Loading';
 
 class Header extends React.Component {
   state = {
@@ -19,7 +20,7 @@ class Header extends React.Component {
   render() {
     const { user: { name }, isLoading } = this.state;
 
-    return (!isLoading ? <h3>Carregando...</h3>
+    return (!isLoading ? <Loading />
       : (
         <header data-testid="header-component">
           <nav>
