@@ -28,11 +28,11 @@ class Header extends React.Component {
             <img src={ LOGO_POSITIVA } alt="TrybeTunes Logo" />
           </Link>
           <nav>
-            <Link data-testid="link-to-search" to="/search">Search</Link>
+            <Link data-testid="link-to-search" to="/search">Pesquisa</Link>
             <Link data-testid="link-to-favorites" to="/favorites">
-              Músicas Favoritas
+              Favoritas
             </Link>
-            <Link data-testid="link-to-profile" to="/profile">Profile</Link>
+            <Link data-testid="link-to-profile" to="/profile">Meu Perfil</Link>
             <span>|</span>
             <span data-testid="header-user-name">{name}</span>
           </nav>
