@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
+import LOGO_POSITIVA from '../assets/LOGO_POSITIVA.png';
 
 class Header extends React.Component {
   state = {
@@ -23,18 +24,18 @@ class Header extends React.Component {
     return (!isLoading ? <Loading />
       : (
         <header data-testid="header-component">
+          <Link to="/">
+            <img src={ LOGO_POSITIVA } alt="TrybeTunes Logo" />
+          </Link>
           <nav>
-            <ul>
-              <li><Link data-testid="link-to-search" to="/search">Search</Link></li>
-              <li>
-                <Link data-testid="link-to-favorites" to="/favorites">
-                  Músicas Favoritas
-                </Link>
-              </li>
-              <li><Link data-testid="link-to-profile" to="/profile">Profile</Link></li>
-            </ul>
+            <Link data-testid="link-to-search" to="/search">Search</Link>
+            <Link data-testid="link-to-favorites" to="/favorites">
+              Músicas Favoritas
+            </Link>
+            <Link data-testid="link-to-profile" to="/profile">Profile</Link>
+            <span>|</span>
+            <span data-testid="header-user-name">{name}</span>
           </nav>
-          <span data-testid="header-user-name">{name}</span>
         </header>
       )
     );
