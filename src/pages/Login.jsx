@@ -35,8 +35,8 @@ class Login extends React.Component {
       isLoading ? <Loading />
         : (
           <div className="page-login" data-testid="page-login">
-            <img src={ LOGO_POSITIVA } alt="TrybeTunes Logo" />
             <form className="login_form">
+              <img src={ LOGO_POSITIVA } alt="TrybeTunes Logo" />
               <input
                 data-testid="login-name-input"
                 type="text"
