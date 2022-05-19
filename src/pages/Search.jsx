@@ -62,7 +62,6 @@ class Search extends React.Component {
   render() {
     const { searchInput, isDisabled, isLoading,
       albunsList, isClicked, artistSearch } = this.state;
-    console.log(albunsList);
 
     return (
       <div data-testid="page-search">
