@@ -1,9 +1,9 @@
 import React from 'react';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from '../components/Loading';
+import AlbumCard from '../components/AlbumCard';
 
 class Search extends React.Component {
   state = {
@@ -79,23 +79,8 @@ class Search extends React.Component {
                 { ` ${artistSearch}` }
               </p>
               <div className="album_list_container">
-                {albunsList.map(({ artistName,
-                  artworkUrl100, collectionId, collectionName }, index) => (
-                  (
-                    <div
-                      className="album_card"
-                      key={ index }
-                    >
-                      <Link
-                        data-testid={ `link-to-album-${collectionId}` }
-                        to={ `/album/${collectionId}` }
-                      >
-                        <img src={ artworkUrl100 } alt={ `${artistName} album` } />
-                        <h3>{ collectionName }</h3>
-                        <h4>{ artistName }</h4>
-                      </Link>
-                    </div>
-                  )))}
+                {albunsList.map((album, index) => (
+                  <AlbumCard album={ album } key={ index } />))}
               </div>
             </>
           )}
