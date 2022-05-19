@@ -11,6 +11,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background: #030303; */
 }
 
 code {
@@ -22,6 +23,7 @@ code {
   align-items: center;
   display: flex;
   justify-content: center;
+  /* color: White; */
 }
 
 .login_form {
@@ -81,7 +83,6 @@ code {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  background: #030303;
   width: 100vw;
   height: 100vh;
   gap: 20px;
