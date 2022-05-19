@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from '../components/Loading';
@@ -39,7 +40,6 @@ class Search extends React.Component {
   render() {
     const { searchInput, isDisabled, isLoading,
       albunsList, isClicked, artistSearch } = this.state;
-    console.log(albunsList);
 
     return (
       <div data-testid="page-search">
@@ -73,10 +73,31 @@ class Search extends React.Component {
         </div>
         <div className="album_list">
           {(isClicked && albunsList.length > 0) && (
-            <p>
-              Resultado de álbuns de:
-              { ` ${artistSearch}` }
-            </p>
+            <>
+              <p>
+                Resultado de álbuns de:
+                { ` ${artistSearch}` }
+              </p>
+              <div className="album_list_container">
+                {albunsList.map(({ artistName,
+                  artworkUrl100, collectionId, collectionName }, index) => (
+                  (
+                    <div
+                      className="album_card"
+                      key={ index }
+                    >
+                      <Link
+                        data-testid={ `link-to-album-${collectionId}` }
+                        to={ `/album/${collectionId}` }
+                      >
+                        <img src={ artworkUrl100 } alt={ `${artistName} album` } />
+                        <h3>{ collectionName }</h3>
+                        <h4>{ artistName }</h4>
+                      </Link>
+                    </div>
+                  )))}
+              </div>
+            </>
           )}
           {(isClicked && albunsList.length === 0) && (<p>Nenhum álbum foi encontrado</p>)}
         </div>
