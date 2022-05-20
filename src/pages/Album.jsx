@@ -32,8 +32,9 @@ class Album extends React.Component {
           artworkUrl100,
           collectionName,
           artistName,
+          trackId,
         }) => ({
-          previewUrl, trackName, artworkUrl100, collectionName, artistName,
+          previewUrl, trackName, artworkUrl100, collectionName, artistName, trackId,
         }),
       )
       .filter(({ previewUrl }) => previewUrl);
@@ -55,12 +56,13 @@ class Album extends React.Component {
             <h3 data-testid="artist-name">{musicsList[0].artistName}</h3>
           </div>
         )}
-        {(!isLoading && musicsList.length) && (
-          albumInfo.map(({ trackName, previewUrl }, index) => (
+        {(!isLoading) && (
+          albumInfo.map(({ trackName, previewUrl, trackId }, index) => (
             <MusicCard
               key={ index }
               trackName={ trackName }
               previewUrl={ previewUrl }
+              trackId={ trackId }
             />
           )))}
       </div>
