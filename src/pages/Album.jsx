@@ -4,12 +4,14 @@ import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import Loading from '../components/Loading';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   state = {
     musicsList: [],
     albumInfo: [],
     isLoading: false,
+    favoriteSongsList: [],
   };
 
   async componentDidMount() {
@@ -24,6 +26,7 @@ class Album extends React.Component {
     } = this.props;
     this.setState({ isLoading: true });
     const musicsList = await getMusics(id);
+    const favoriteSongsList = await getFavoriteSongs();
     const albumInfo = musicsList
       .map(
         ({
@@ -38,12 +41,11 @@ class Album extends React.Component {
         }),
       )
       .filter(({ previewUrl }) => previewUrl);
-    this.setState({ isLoading: false, musicsList, albumInfo });
+    this.setState({ isLoading: false, musicsList, albumInfo, favoriteSongsList });
   };
 
   render() {
-    const { musicsList, isLoading, albumInfo } = this.state;
-
+    const { musicsList, isLoading, albumInfo, favoriteSongsList } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
@@ -63,6 +65,8 @@ class Album extends React.Component {
               trackName={ trackName }
               previewUrl={ previewUrl }
               trackId={ trackId }
+              isFavorite={ favoriteSongsList
+                .some((song) => song.trackName === trackName) }
             />
           )))}
       </div>
