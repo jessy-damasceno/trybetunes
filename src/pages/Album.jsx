@@ -18,6 +18,11 @@ class Album extends React.Component {
     this.getMusicList();
   }
 
+  getFavoriteSongsList = async () => {
+    const favoriteSongsList = await getFavoriteSongs();
+    this.setState({ favoriteSongsList });
+  }
+
   getMusicList = async () => {
     const {
       match: {
@@ -59,14 +64,16 @@ class Album extends React.Component {
           </div>
         )}
         {(!isLoading) && (
-          albumInfo.map(({ trackName, previewUrl, trackId }, index) => (
+          albumInfo.map((musica, index) => (
             <MusicCard
               key={ index }
-              trackName={ trackName }
-              previewUrl={ previewUrl }
-              trackId={ trackId }
+              getFavoriteSongsList={ this.getFavoriteSongsList }
+              trackName={ musica.trackName }
+              previewUrl={ musica.previewUrl }
+              trackId={ musica.trackId }
               isFavorite={ favoriteSongsList
-                .some((song) => song.trackName === trackName) }
+                .some((song) => song.trackName === musica.trackName) }
+              musica={ musica }
             />
           )))}
       </div>

@@ -1,42 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { addSong, removeSong } from '../services/favoriteSongsAPI';
-import getMusics from '../services/musicsAPI';
 import Loading from './Loading';
 
 class MusicCard extends React.Component {
   state = {
-    isChecked: false,
     isLoading: false,
-  }
-
-  componentDidMount() {
-    const { isFavorite } = this.props;
-    this.setState({ isChecked: isFavorite });
   }
 
   handleChange = async ({ target }) => {
     const { checked } = target;
-    const { trackId } = this.props;
+    const { trackId, getFavoriteSongsList, musica } = this.props;
     this.setState({
-      isChecked: checked,
       isLoading: true,
     });
-    const getMusic = await getMusics(trackId);
     if (checked) {
-      await addSong(getMusic);
+      // const getMusic = await getMusics(trackId);
+      await addSong(musica);
+      await getFavoriteSongsList();
     } else {
-      await removeSong(getMusic);
+      await removeSong({ trackId });
+      if (getFavoriteSongsList) {
+        await getFavoriteSongsList();
+      }
     }
     this.setState({ isLoading: false });
   }
 
   render() {
-    const { isChecked, isLoading } = this.state;
-    const { trackName, previewUrl, trackId } = this.props;
+    const { isLoading } = this.state;
+    const { trackName, previewUrl, trackId, isFavorite } = this.props;
     return (
       <div className="music_card">
-        {isLoading && <Loading />}
         <span>{trackName}</span>
         <audio data-testid="audio-component" src={ previewUrl } controls>
           <track kind="captions" />
@@ -45,15 +40,17 @@ class MusicCard extends React.Component {
           <code>audio</code>
           .
         </audio>
-        <label htmlFor="favorite_music">
+        {isLoading && <Loading />}
+        <label htmlFor="Favorita">
+          Favorita
           <input
             data-testid={ `checkbox-music-${trackId}` }
             type="checkbox"
-            name="favorite_music"
+            name="Favorita"
+            id="Favorita"
             onChange={ this.handleChange }
-            checked={ isChecked }
+            checked={ isFavorite }
           />
-          Favorita
         </label>
       </div>
     );
@@ -65,6 +62,8 @@ MusicCard.propTypes = {
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
+  getFavoriteSongsList: PropTypes.func.isRequired,
+  musica: PropTypes.objectOf.isRequired,
 };
 
 export default MusicCard;
