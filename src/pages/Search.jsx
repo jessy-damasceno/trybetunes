@@ -1,31 +1,31 @@
 import React from 'react';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-// import Carousel from 'react-multi-carousel';
+import Carousel from 'react-multi-carousel';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from '../components/Loading';
 import AlbumCard from '../components/AlbumCard';
 import 'react-multi-carousel/lib/styles.css';
 
-// const responsive = {
-//   superLargeDesktop: {
-//     // the naming can be any, depends on you.
-//     breakpoint: { max: 4000, min: 3000 },
-//     items: 5,
-//   },
-//   desktop: {
-//     breakpoint: { max: 3000, min: 1024 },
-//     items: 3,
-//   },
-//   tablet: {
-//     breakpoint: { max: 1024, min: 464 },
-//     items: 2,
-//   },
-//   mobile: {
-//     breakpoint: { max: 464, min: 0 },
-//     items: 1,
-//   },
-// };
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 class Search extends React.Component {
   state = {
@@ -101,11 +101,11 @@ class Search extends React.Component {
                 { ` ${artistSearch}` }
               </p>
               <div className="album_list_container">
-                {/* <Carousel responsive={ responsive }> */}
-                {albunsList.map((album, index) => (
-                  <AlbumCard album={ album } key={ index } />
-                ))}
-                {/* </Carousel> */}
+                <Carousel responsive={ responsive }>
+                  {albunsList.map((album, index) => (
+                    <AlbumCard album={ album } key={ index } />
+                  ))}
+                </Carousel>
               </div>
             </>
           )}

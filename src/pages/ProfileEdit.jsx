@@ -18,7 +18,6 @@ class ProfileEdit extends React.Component {
   getUserDetails = async () => {
     this.setState({ isLoading: true });
     const user = await getUser();
-    console.log(user);
     this.setState({ isLoading: false, user }, () => this
       .setState({ isDisabled: this.validateButton() }));
   }
@@ -35,9 +34,9 @@ class ProfileEdit extends React.Component {
     const { name, email, image, description } = user;
 
     if (name?.length >= min
-      || email?.includes('@')
-      || description?.length > 0
-      || image?.length > 0) {
+      && email?.includes('@')
+      && description?.length > 0
+      && image?.length > 0) {
       return true;
     }
     return false;

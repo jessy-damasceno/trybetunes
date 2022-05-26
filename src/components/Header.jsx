@@ -24,7 +24,7 @@ class Header extends React.Component {
     return (!isLoading ? <Loading />
       : (
         <header data-testid="header-component">
-          <Link to="/">
+          <Link to="/search">
             <img src={ LOGO_POSITIVA } alt="TrybeTunes Logo" />
           </Link>
           <nav>
