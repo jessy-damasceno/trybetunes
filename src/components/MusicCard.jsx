@@ -15,7 +15,6 @@ class MusicCard extends React.Component {
       isLoading: true,
     });
     if (checked) {
-      // const getMusic = await getMusics(trackId);
       await addSong(musica);
       await getFavoriteSongsList();
     } else {
